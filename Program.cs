@@ -73,6 +73,12 @@ class Todo
 
         while (true)
         {
+            if(Todos.Count == 0)
+            {
+                Console.WriteLine("No Todo has been added yet!");
+            }
+
+
             int y = 1;
             foreach (string i in Todos)
             {
@@ -80,25 +86,30 @@ class Todo
                 y++;
             }
 
-            Console.WriteLine("Would you like to add more ? (Y/N)");
-            string moduleChange = Console.ReadLine()
-                                         .ToUpper();
-            if (moduleChange == "Y") 
-            {
-                EditTodo();
-            }
-            else
-            {
-                return;
-            }
+            return;
+
+            //Console.WriteLine("Would you like to add a todo ? (Y/N)");
+            //string moduleChange = Console.ReadLine()
+            //                             .ToUpper();
+            //if (moduleChange == "Y") 
+            //{
+            //    AddTodo();
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
         }
 
     }
     // Add todo module
-    void EditTodo()
+    void AddTodo()
     {
+        while(true)
+        {
 
+        }
     }
     // Remove todo module
     void RemoveTodo()
