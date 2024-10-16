@@ -7,7 +7,9 @@ class Todo
 {
     // Initial memory/variables
     bool running = true;
-    List<string> Todos = new List<string>() {"Test","Test2" };
+    List<string> Todos = new List<string>() {"Test1" ,"Test2" };
+
+
 
     // Main module 
     static void Main(string[] args)
@@ -27,9 +29,16 @@ class Todo
     string UserInput()
     {
         // Module to read userinput
-        Console.WriteLine("Please write:");
-        string userChoice = Console.ReadLine()
-                                   .ToUpper();
+        string userChoice;
+        do
+        {
+            Console.WriteLine("Enter something:");
+            userChoice = Console.ReadLine()
+                .ToUpper();
+            Thread.Sleep(1000);
+        } while (string.IsNullOrWhiteSpace(userChoice));
+
+
         return userChoice;
     }
 
@@ -47,21 +56,25 @@ class Todo
         switch (UserInput())
         {
             case "S":
-                Console.WriteLine("[S]ee all TODOs");
+                Console.WriteLine("\n[S]ee all TODOs");
                 ViewTodo();
                 break;
             case "A":
-                Console.WriteLine("[A]dd a TODO");
+                Console.WriteLine("\n[A]dd a TODO");
+                AddTodo();
                 break;
             case "R":
-                Console.WriteLine("[R]emove a TODO");
+                Console.WriteLine("\n[R]emove a TODO");
+                RemoveTodo();
                 break;
             case "E":
-                Console.WriteLine("[E]xit");
+                Console.WriteLine("\n[E]xit");
                 ExitTodo();
                 break;
             default:
-                Console.WriteLine("Nothing selected / Wrong input!");
+                Console.WriteLine("\nNothing selected / Wrong input!\n");
+                Thread.Sleep(1000);
+                System.Console.Clear();
                 break;
         }
 
@@ -70,7 +83,8 @@ class Todo
     // View todo module
     void ViewTodo()
     {
-
+        Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+        Console.WriteLine("Current ToDos");
         while (true)
         {
             if(Todos.Count == 0)
@@ -86,19 +100,9 @@ class Todo
                 y++;
             }
 
+            Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+            Thread.Sleep(2000);
             return;
-
-            //Console.WriteLine("Would you like to add a todo ? (Y/N)");
-            //string moduleChange = Console.ReadLine()
-            //                             .ToUpper();
-            //if (moduleChange == "Y") 
-            //{
-            //    AddTodo();
-            //}
-            //else
-            //{
-            //    return;
-            //}
 
         }
 
@@ -106,15 +110,28 @@ class Todo
     // Add todo module
     void AddTodo()
     {
-        while(true)
+        string userInput = UserInput();
+    
+        if (!Todos.Contains(userInput))
         {
-
+            Todos.Add(userInput);
+            Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+            return;
         }
+        else
+        {
+            Console.WriteLine("\nDescription already exist, returning to the main menu");
+            Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+            Thread.Sleep(1000);
+            return;
+        }
+
+
     }
     // Remove todo module
     void RemoveTodo()
     {
-
+        Todos.Remove(UserInput());
     }
 
     // Exit module
