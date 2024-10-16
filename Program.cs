@@ -32,7 +32,7 @@ class Todo
         string userChoice;
         do
         {
-            Console.WriteLine("Enter something:");
+            Console.WriteLine("\nEnter something:");
             userChoice = Console.ReadLine()
                 .ToUpper();
             Thread.Sleep(1000);
@@ -101,7 +101,7 @@ class Todo
             }
 
             Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             return;
 
         }
@@ -115,7 +115,9 @@ class Todo
         if (!Todos.Contains(userInput))
         {
             Todos.Add(userInput);
+            Console.WriteLine($"{userInput} has been added");
             Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+            Thread.Sleep(1000);
             return;
         }
         else
@@ -131,7 +133,43 @@ class Todo
     // Remove todo module
     void RemoveTodo()
     {
-        Todos.Remove(UserInput());
+        ViewTodo();
+        if(Todos.Count == 0) 
+        {
+            return;
+        }
+
+        Console.WriteLine("Type a number to remove the ToDo");
+        
+        string userInput = UserInput();
+        string userConfirm;
+
+        if(Int32.TryParse(userInput, out int value) && Todos.Count >= value) 
+        {  
+            Console.WriteLine($"You will remove {Todos[value-1]}");
+            Console.WriteLine("Please Confirm(Y/N)");
+            userConfirm = UserInput();
+
+            if(userConfirm == "Y")
+            {
+                Console.WriteLine($"{Todos[value-1]} has been removed\n");
+                Todos.Remove(Todos[value - 1]);
+                Thread.Sleep(1000);
+            }
+            else
+            {
+                Console.WriteLine("Returning to the main menu!\n");
+                Thread.Sleep(1000);
+                Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+                return;
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Index {userInput} does not exist!");
+            Console.WriteLine("\n~~~~~~~~~~~~~~~~\n");
+            return;
+        }
     }
 
     // Exit module
