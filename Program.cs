@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Threading;
 
 class Todo
 {
     // Initial memory/variables
+    bool running = true;
     List<string> Todos = new List<string>() {"Test","Test2" };
 
     // Main module 
@@ -14,7 +16,7 @@ class Todo
         Todo t = new Todo();
 
         // Looping till exit
-        while (true)
+        while (t.running)
         {
             t.Display();
         }
@@ -56,6 +58,7 @@ class Todo
                 break;
             case "E":
                 Console.WriteLine("[E]xit");
+                ExitTodo();
                 break;
             default:
                 Console.WriteLine("Nothing selected / Wrong input!");
@@ -93,9 +96,21 @@ class Todo
 
     }
     // Add todo module
+    void EditTodo()
+    {
 
+    }
     // Remove todo module
+    void RemoveTodo()
+    {
+
+    }
 
     // Exit module
-
+    void ExitTodo()
+    {
+        Console.WriteLine("Exiting Program now!");
+        Thread.Sleep(2000);
+        running = false;
+    }
 }
